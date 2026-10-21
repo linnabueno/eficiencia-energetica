@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioTI: Eficiência Energética e Computação Sustentável</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="family">
+    <style>
+        :root {
+            --verde-floresta: #1b4332;
+            --verde-profundo: #081c15;
+            --verde-folha: #2d6a4f;
+            --verde-claro: #40916c;
+            --verde-broto: #74c69d;
+            --verde-menta: #b7e4c7;
+            --verde-eco: #d8f3dc;
+            --fundo-suave: #f4f9f5;
+            --laranja-flor: #ff9f1c;
+            --laranja-suave: #ffeacc;
+            --texto-principal: #2d3748;
+            --borda-folha: 24px 4px 24px 4px;
+            --shadow-suave: 0 10px 30px rgba(27, 67, 50, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--fundo-suave);
+            color: var(--texto-principal);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .ludico-titulo {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--verde-floresta);
+        }
+
+        /* Elementos Decorativos de Natureza */
+        .folha-decor {
+            position: absolute;
+            background: linear-gradient(135deg, var(--verde-broto), var(--verde-claro));
+            border-radius: var(--borda-folha);
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Header e Hero */
+        header {
+            background: linear-gradient(180deg, var(--verde-eco) 0%, rgba(244,249,245,0) 100%);
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--verde-floresta);
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--verde-folha);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--laranja-flor);
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 40px auto 80px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--verde-profundo);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--verde-folha);
+            margin-bottom: 30px;
+        }
+
+        .academic-badge {
+            display: inline-block;
+            background-color: var(--verde-menta);
+            color: var(--verde-floresta);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-svg {
+            width: 100%;
+            max-width: 450px;
+            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.1));
+        }
+
+        /* Divisores de Ondas Naturais */
+        .wave-container {
+            position: relative;
+            width: 100%;
+            height: 70px;
+            background-color: transparent;
+            margin-bottom: -5px;
+        }
+
+        /* Seções Acadêmicas */
+        .section-academic {
+            background-color: #ffffff;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .section-academic.alt-bg {
+            background-color: var(--verde-eco);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title-wrapper {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: var(--laranja-flor);
+            border-radius: 3px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Cards Temáticos em formato de Folha */
+        .organic-card {
+            background: #ffffff;
+            border-radius: var(--borda-folha);
+            padding: 40px 30px;
+            box-shadow: var(--shadow-suave);
+            border: 2px solid rgba(116, 198, 157, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .organic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(27, 67, 50, 0.15);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--verde-eco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .card-icon svg {
+            width: 35px;
+            height: 35px;
+            fill: var(--verde-folha);
+        }
+
+        .organic-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .child-explanation {
+            background-color: var(--fundo-suave);
+            border-left: 4px solid var(--verde-claro);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 12px 12px 0;
+            font-size: 0.95rem;
+        }
+
+        .child-explanation strong {
+            color: var(--verde-folha);
+            display: block;
+            margin-bottom: 5px;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* Seção de Curiosidades */
+        .curiosidades-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .curio-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .curio-item {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            box-shadow: var(--shadow-suave);
+        }
+
+        .curio-number {
+            background-color: var(--laranja-suave);
+            color: var(--laranja-flor);
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.5rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Seção do Quiz */
+        .quiz-box {
+            background: white;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: var(--shadow-suave);
+            border: 3px dashed var(--verde-broto);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--verde-floresta);
+            margin-bottom: 25px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background-color: var(--fundo-suave);
+            border: 2px solid var(--verde-menta);
+            padding: 18px 25px;
+            border-radius: 15px;
+            font-size: 1.05rem;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            color: var(--texto-principal);
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            background-color: var(--verde-eco);
+            border-color: var(--verde-claro);
+            transform: scale(1.01);
+        }
+
+        .option-btn.correct {
+            background-color: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724 !important;
+        }
+
+        .option-btn.incorrect {
+            background-color: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24 !important;
+        }
+
+        .quiz-feedback {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-align: center;
+            display: none;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background-color: var(--verde-folha);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--verde-floresta);
+        }
+
+        .nav-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--verde-profundo);
+            color: #ffffff;
+            padding: 6px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2rem;
+            color: var(--verde-broto);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .curiosidades-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Elementos Flutuantes da Natureza -->
+    <div class="folha-decor" style="width: 120px; height: 120px; top: 15%; left: -40px; transform: rotate(45deg);"></div>
+    <div class="folha-decor" style="width: 160px; height: 160px; top: 45%; right: -60px; transform: rotate(-25deg); background: var(--laranja-suave);"></div>
+    <div class="folha-decor" style="width: 100px; height: 100px; top: 75%; left: -20px; transform: rotate(15deg);"></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 19H11V17H13V19ZM15.07 11.25L14.17 12.17C13.45 12.9 13 13.5 13 15H11V14.5C11 13.4 11.45 12.4 12.17 11.67L13.41 10.41C13.78 10.05 14 9.55 14 9C14 7.9 13.1 7 12 7C10.9 7 10 7.9 10 9H8C8 6.79 9.79 5 12 5C14.21 5 16 6.79 16 9C16 9.88 15.64 10.68 15.07 11.25Z" fill="#2d6a4f"/>
+                </svg>
+                BioTI
+            </div>
+            <ul class="nav-links">
+                <li><a href="#pilares">Pilares Científicos</a></li>
+                <li><a href="#curiosidades">Curiosidades</a></li>
+                <li><a href="#quiz">Desafio Eco-Digital</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-text">
+                <span class="academic-badge">Simpósio de Ciência da Computação Sustentável</span>
+                <h1>Arquiteturas Verdes para o Futuro Digital</h1>
+                <p>Explorando a fusão entre engenharia de alta performance, eficiência energética e preservação planetária através da TI Verde.</p>
+                <svg width="200" height="20" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 15C30 5 60 5 90 12C120 18 150 10 195 5" stroke="#ff9f1c" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="hero-image-container">
+                <!-- SVG de Árvore Tecnológica Nativa -->
+                <svg class="hero-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="200" cy="200" r="180" fill="#d8f3dc" opacity="0.6"/>
+                    <!-- Tronco/Circuito -->
+                    <path d="M190 350 L190 240 L140 190 L140 150 M190 240 L240 180 L240 130" stroke="#1b4332" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Folhas/Nuvens de TI -->
+                    <path d="M110 160 C90 160 80 140 95 120 C85 100 110 80 125 95 C140 80 170 90 165 115 C180 125 160 160 110 160 Z" fill="#2d6a4f"/>
+                    <path d="M250 140 C235 140 225 125 235 110 C225 95 245 80 257 92 C270 80 292 88 288 107 C300 115 285 140 250 140 Z" fill="#40916c"/>
+                    <path d="M190 110 C170 110 160 90 177 70 C165 50 190 30 207 47 C222 30 250 40 244 67 C260 77 240 110 190 110 Z" fill="#74c69d"/>
+                    <!-- Detalhes Digitais (Frutos) -->
+                    <circle cx="125" cy="120" r="8" fill="#ff9f1c" />
+                    <circle cx="260" cy="110" r="8" fill="#ff9f1c" />
+                    <circle cx="190" cy="70" r="8" fill="#ff9f1c" />
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Divisor de Onda -->
+    <div class="wave-container">
+        <svg viewBox="0 0 1440 74" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; bottom: 0; width: 100%;">
+            <path d="M0 22L60 29.3C120 36.7 240 51.3 360 55C480 58.7 600 51.3 720 40.3C840 29.3 960 14.7 1080 11C1200 7.3 1320 14.7 1380 18.3L1440 22V74H1380C1320 74 1200 74 1080 74C960 74 840 74 720 74C600 74 480 74 360 74C240 74 120 74 60 74H0V22Z" fill="#ffffff"/>
+        </svg>
+    </div>
+
+    <!-- Seção de Conteúdo Acadêmico -->
+    <section id="pilares" class="section-academic">
+        <div class="section-container">
+            <div class="section-title-wrapper">
+                <h2 class="section-title">Pilares da Engenharia Sustentável</h2>
+            </div>
+
+            <div class="grid-3">
+                <!-- Card 1: Virtualização -->
+                <div class="organic-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+                    </div>
+                    <h3>Consolidação e Virtualização</h3>
+                    <p>A virtualização de servidores maximiza a taxa de utilização dos recursos de hardware subjacentes. Ao encapsular sistemas operacionais isolados em hipervisores, reduz-se a ociosidade dos processadores e mitiga-se o desperdício termodinâmico nos sistemas de refrigeração.</p>
+                    
+                    <div class="child-explanation">
+                        <strong>🌲 Explicação para Pequenos Cientistas:</strong>
+                        Imagine uma árvore enorme na floresta. Em vez de termos uma árvore para cada passarinho, vários bichinhos diferentes (esquilos, corujas e formigas) moram juntos na mesma árvore! Assim, economizamos floresta e todo mundo fica seguro junto.
+                    </div>
+                </div>
+
+                <!-- Card 2: Computação em Nuvem -->
+                <div class="organic-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/></svg>
+                    </div>
+                    <h3>Elasticidade em Cloud Computing</h3>
+                    <p>Data Centers em Nuvem operam com PUE (Power Usage Effectiveness) otimizado através de arquiteturas hiper-escaláveis. A alocação dinâmica e a elasticidade permitem que servidores sejam ligados ou desligados sob demanda, reduzindo drasticamente a pegada de carbono global.</p>
+                    
+                    <div class="child-explanation">
+                        <strong>🌧️ Explicação para Pequenos Cientistas:</strong>
+                        A nuvem funciona igual ao ciclo da chuva! A água evapora, vira nuvem e chove exatamente onde as plantinhas estão com sede. Os computadores na nuvem mandam energia e ajuda digital só para quem precisa naquele momento, sem gastar água à toa!
+                    </div>
+                </div>
+
+                <!-- Card 3: Gerenciamento de Energia -->
+                <div class="organic-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm1-13h-2v6h5v-2h-3V7z"/></svg>
+                    </div>
+                    <h3>Mecanismos de Power Capping</h3>
+                    <p>Sistemas modernos implementam DVFS (Dynamic Voltage and Frequency Scaling) acoplados a algoritmos inteligentes de gerenciamento de energia. Essas tecnologias limitam o consumo energético dos núcleos do processador nos horários de pico, mantendo a estabilidade sistêmica.</p>
+                    
+                    <div class="child-explanation">
+                        <strong>🐻 Explicação para Pequenos Cientistas:</strong>
+                        É o truque dos ursos que hibernam! Quando o inverno chega e está tudo calmo, os ursos dormem e reduzem o ritmo do coração para gastar pouca energia. Os computadores fazem o mesmo: quando ninguém está usando, eles tiram uma soneca para poupar a natureza!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divisor de Onda Invertido -->
+    <div class="wave-container" style="transform: rotate(180deg); margin-bottom: 0; margin-top: -5px;">
+        <svg viewBox="0 0 1440 74" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%;">
+            <path d="M0 22L60 29.3C120 36.7 240 51.3 360 55C480 58.7 600 51.3 720 40.3C840 29.3 960 14.7 1080 11C1200 7.3 1320 14.7 1380 18.3L1440 22V74H1380C1320 74 1200 74 1080 74C960 74 840 74 720 74C600 74 480 74 360 74C240 74 120 74 60 74H0V22Z" fill="#d8f3dc"/>
+        </svg>
+    </div>
+
+    <!-- Seção Curiosidades -->
+    <section id="curiosidades" class="section-academic alt-bg" style="padding-top: 20px;">
+        <div class="section-container">
+            <div class="section-title-wrapper">
+                <h2 class="section-title">Curiosidades da Floresta Digital</h2>
+            </div>
+
+            <div class="curiosidades-container">
+                <div class="curio-list">
+                    <div class="curio-item">
+                        <div class="curio-number">1</div>
+                        <div>
+                            <h4 style="font-family: 'Fredoka', sans-serif; color: var(--verde-floresta); margin-bottom: 5px;">Data Centers Subaquáticos</h4>
+                            <p>Algumas empresas instalam seus computadores dentro de cápsulas lacradas no fundo do oceano gelado! A própria água do mar resfria as máquinas naturalmente, poupando toneladas de energia elétrica com ar-condicionado.</p>
+                        </div>
+                    </div>
+                    <div class="curio-item">
+                        <div class="curio-number">2</div>
+                        <div>
+                            <h4 style="font-family: 'Fredoka', sans-serif; color: var(--verde-floresta); margin-bottom: 5px;">A Internet Pesa Morangos?</h4>
+                            <p>Se juntarmos todos os elétrons em movimento que fazem a internet funcionar no mundo inteiro agora, eles pesam aproximadamente 50 gramas. Isso é o equivalente ao peso de dois morangos médios sustentando todo o ecossistema digital!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ilustração Decorativa Lúdica Adicional -->
+                <div style="display: flex; justify-content: center;">
+                    <svg width="280" height="280" viewBox="0 0 200 200">
+                        <path d="M100 20 C60 20 40 50 40 90 C40 140 100 180 100 180 C100 180 160 140 160 90 C160 50 140 20 100 20 Z" fill="#40916c" opacity="0.8"/>
+                        <path d="M100 20 L100 180" stroke="#1b4332" stroke-width="3" stroke-dasharray="5,5"/>
+                        <!-- Linhas de Circuito na Folha -->
+                        <path d="M100 60 L130 40 L150 40" stroke="#d8f3dc" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        <path d="M100 100 L70 120 L50 120" stroke="#d8f3dc" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        <circle cx="150" cy="40" r="6" fill="#ff9f1c"/>
+                        <circle cx="50" cy="120" r="6" fill="#ff9f1c"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divisor de Onda para o Quiz -->
+    <div class="wave-container" style="margin-bottom: -5px;">
+        <svg viewBox="0 0 1440 74" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; bottom: 0; width: 100%;">
+            <path d="M0 22L60 29.3C120 36.7 240 51.3 360 55C480 58.7 600 51.3 720 40.3C840 29.3 960 14.7 1080 11C1200 7.3 1320 14.7 1380 18.3L1440 22V74H1380C1320 74 1200 74 1080 74C960 74 840 74 720 74C600 74 480 74 360 74C240 74 120 74 60 74H0V22Z" fill="#ffffff"/>
+        </svg>
+    </div>
+
+    <!-- Seção do Quiz -->
+    <section id="quiz" class="section-academic">
+        <div class="section-container">
+            <div class="section-title-wrapper">
+                <h2 class="section-title">Desafio dos Guardiões da Natureza</h2>
+                <p style="margin-top: 15px; color: var(--verde-folha); font-weight: 600;">Responda às questões acadêmicas com seu superpoder ecológico!</p>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-header">
+                    <span id="quiz-progress" style="font-family: 'Fredoka', sans-serif; color: var(--laranja-flor); font-size: 1.2rem;">Pergunta 1 de 3</span>
+                </div>
+                
+                <div id="quiz-body">
+                    <p class="quiz-question" id="question-text">Carregando pergunta...</p>
+                    <div class="quiz-options" id="options-container">
+                        <!-- Alternativas injetadas via JS -->
+                    </div>
+                </div>
+
+                <div class="quiz-feedback" id="quiz-feedback"></div>
+
+                <div class="quiz-nav">
+                    <button class="nav-btn" id="prev-btn" onclick="changeQuestion(-1)" disabled>Anterior</button>
+                    <button class="nav-btn" id="next-btn" onclick="changeQuestion(1)" disabled>Próxima</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">BioTI</div>
+            <p>© 2026 Simpósio de TI Sustentável. Desenvolvido com amor à ciência e ao nosso planeta.</p>
+        </div>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                question: "O que a 'Virtualização de Servidores' faz para ajudar a salvar o planeta?",
+                options: [
+                    "A) Cria florestas de árvores de verdade dentro dos computadores.",
+                    "B) Junta vários sistemas para rodarem em uma única máquina física, evitando ligar computadores à toa.",
+                    "C) Deixa a tela do computador verde para cansar menos os olhos."
+                ],
+                correct: 1,
+                explanation: "Isso mesmo! A virtualização consolida cargas de trabalho, reduzindo a necessidade de manter múltiplos servidores físicos ligados e gastando energia."
+            },
+            {
+                question: "Como a Computação em Nuvem (Cloud Computing) economiza energia?",
+                options: [
+                    "A) Ela distribui recursos de forma elástica, enviando poder digital apenas para quem precisa no momento.",
+                    "B) Ela usa o vento lá das nuvens do céu para resfriar os processadores.",
+                    "C) Ela faz os computadores funcionarem somente nos dias de chuva."
+                ],
+                correct: 0,
+                explanation: "Perfeito! A elasticidade da nuvem garante alta eficiência energética (PUE), alocando recursos dinamicamente sob demanda."
+            },
+            {
+                question: "Qual o comportamento dos computadores que se assemelha à 'Hibernação dos Ursos'?",
+                options: [
+                    "A) Fazer barulho de rugido quando estão processando códigos difíceis.",
+                    "B) O mecanismo de Power Capping e DVFS, que reduz a velocidade e o consumo dos núcleos quando estão ociosos.",
+                    "C) Sair correndo pela floresta para procurar mel."
+                ],
+                correct: 1,
+                explanation: "Excelente! Técnicas de gerenciamento de energia como o DVFS diminuem a frequência e voltagem dos chips quando o trabalho diminui."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let selectedAnswers = Array(quizData.length).fill(null);
+
+        function loadQuestion() {
+            const question = quizData[currentQuestionIndex];
+            document.getElementById('quiz-progress').innerText = `Pergunta ${currentQuestionIndex + 1} de ${quizData.length}`;
+            document.getElementById('question-text').innerText = question.question;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.innerText = option;
+                button.onclick = () => selectOption(index);
+                
+                if (selectedAnswers[currentQuestionIndex] !== null) {
+                    button.disabled = true;
+                    if (index === question.correct) {
+                        button.classList.add('correct');
+                    } else if (index === selectedAnswers[currentQuestionIndex]) {
+                        button.classList.add('incorrect');
+                    }
+                }
+                
+                optionsContainer.appendChild(button);
+            });
+
+            const feedback = document.getElementById('quiz-feedback');
+            if (selectedAnswers[currentQuestionIndex] !== null) {
+                feedback.style.display = 'block';
+                if (selectedAnswers[currentQuestionIndex] === question.correct) {
+                    feedback.style.backgroundColor = '#d4edda';
+                    feedback.style.color = '#155724';
+                    feedback.innerText = `🌟 Parabéns, Guardião! ${question.explanation}`;
+                } else {
+                    feedback.style.backgroundColor = '#f8d7da';
+                    feedback.style.color = '#721c24';
+                    feedback.innerText = `🌱 Quase lá! A resposta certa era a alternativa com base científica. Continue tentando!`;
+                }
+                document.getElementById('next-btn').disabled = false;
+            } else {
+                feedback.style.display = 'none';
+                document.getElementById('next-btn').disabled = true;
+            }
+
+            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+            if (currentQuestionIndex === quizData.length - 1 && selectedAnswers[currentQuestionIndex] !== null) {
+                document.getElementById('next-btn').innerText = 'Finalizar';
+            } else {
+                document.getElementById('next-btn').innerText = 'Próxima';
+            }
+        }
+
+        function selectOption(index) {
+            selectedAnswers[currentQuestionIndex] = index;
+            loadQuestion();
+        }
+
+        function changeQuestion(direction) {
+            if (direction === 1 && currentQuestionIndex === quizData.length - 1) {
+                alert("🎉 Incrível! Você concluiu o Desafio Eco-Digital e se tornou um Guardião oficial da TI Verde!");
+                return;
+            }
+            currentQuestionIndex += direction;
+            loadQuestion();
+        }
+
+        // Initialize quiz
+        loadQuestion();
+    </script>
+</body>
+</html>
