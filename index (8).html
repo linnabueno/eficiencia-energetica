@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCloud | Infraestrutura Digital Sustentável</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- DESIGN SYSTEM & CSS VARIABLES --- */
+        :root {
+            --bg-deep: #060d0a;
+            --bg-surface: rgba(10, 25, 18, 0.7);
+            --border-glow: rgba(46, 213, 115, 0.2);
+            --primary-neon: #2ed573;
+            --secondary-cyan: #00d2d3;
+            --text-main: #f5f6fa;
+            --text-muted: #a4b0be;
+            --forest-gradient: linear-gradient(135deg, #051911 0%, #0c2e1f 100%);
+            --neon-glow: 0 0 20px rgba(46, 213, 115, 0.4);
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(46, 213, 115, 0.1) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(0, 212, 211, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            background: rgba(6, 13, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-neon);
+            text-shadow: var(--neon-glow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-neon);
+            text-shadow: var(--neon-glow);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem 2rem;
+            background: linear-gradient(rgba(6,13,10,0.5), rgba(6,13,10,0.9)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1920') center/cover no-repeat;
+            border-bottom: 2px solid rgba(46, 213, 115, 0.1);
+        }
+
+        .hero-badge {
+            background: rgba(46, 213, 115, 0.1);
+            border: 1px solid var(--primary-neon);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            color: var(--primary-neon);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            box-shadow: inset 0 0 10px rgba(46, 213, 115, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, var(--primary-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 700px;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .btn-glow {
+            padding: 1rem 2.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--bg-deep);
+            background: var(--primary-neon);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: var(--neon-glow);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-glow:hover {
+            background: var(--secondary-cyan);
+            box-shadow: 0 0 25px rgba(0, 210, 211, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* --- CORE PILLARS SECTION --- */
+        .pillars {
+            padding: 8rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-neon);
+            margin: 10px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        .grid-pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Glassmorphism Card Design */
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            backdrop-filter: blur(8px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(46, 213, 115, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-neon);
+            box-shadow: 0 10px 30px rgba(46, 213, 115, 0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--primary-neon);
+            margin-bottom: 1.5rem;
+            text-shadow: var(--neon-glow);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- ENERGY EFFICIENCY GALLERY --- */
+        .efficiency {
+            background: var(--forest-gradient);
+            padding: 8rem 4rem;
+            border-top: 1px solid var(--border-glow);
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .gallery-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .gallery-img-wrapper {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border-glow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .gallery-img-wrapper img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(20%) contrast(110%);
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(6, 13, 10, 0.95));
+        }
+
+        .gallery-info h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--primary-neon);
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- INTERACTIVE QUIZ --- */
+        .quiz-section {
+            padding: 8rem 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-container {
+            background: var(--bg-surface);
+            border: 2px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .quiz-progress {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: var(--secondary-cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quiz-question {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.2rem 1.5rem;
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            background: rgba(46, 213, 115, 0.1);
+            border-color: var(--primary-neon);
+            padding-left: 2rem;
+        }
+
+        .option-btn.correct {
+            background: rgba(46, 213, 115, 0.3) !important;
+            border-color: var(--primary-neon) !important;
+            box-shadow: 0 0 15px rgba(46, 213, 115, 0.3);
+        }
+
+        .option-btn.wrong {
+            background: rgba(255, 71, 87, 0.3) !important;
+            border-color: #ff4757 !important;
+        }
+
+        .quiz-footer {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* --- EXTRA CURIOSITIES --- */
+        .curiosities {
+            padding: 6rem 4rem;
+            background: rgba(10, 25, 18, 0.4);
+            border-top: 1px solid var(--border-glow);
+        }
+
+        .curio-layout {
+            display: flex;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .curio-box {
+            flex: 1;
+            background: linear-gradient(145deg, #0a1f16, #05100b);
+            border-left: 4px solid var(--secondary-cyan);
+            padding: 2.5rem;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .curio-box h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #030705;
+            padding: 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border-glow);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 968px) {
+            .navbar { padding: 1.5rem 2rem; }
+            .nav-links { display: none; } /* Simplificação mobile */
+            .hero h1 { font-size: 2.5rem; }
+            .gallery-showcase { grid-template-columns: 1fr; gap: 2rem; }
+            .curio-layout { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <i class="fa-solid fa-leaf"></i> ECOCLOUD
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero">Início</a></li>
+            <li><a href="#pilares">Pilares</a></li>
+            <li><a href="#eficiencia">Eficiência</a></li>
+            <li><a href="#quiz">Desafio Eco</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-badge">A Revolução da TI Verde</div>
+        <h1>Arquitetura Digital Inteligente<br>e Autossustentável</h1>
+        <p>Explore como a união da Computação em Nuvem de alta performance com a Virtualização massiva redefinem os limites tecnológicos enquanto preservam os ecossistemas do planeta.</p>
+        <a href="#pilares" class="btn-glow">Descobrir Tecnologia</a>
+    </section>
+
+    <section class="pillars" id="pilares">
+        <div class="section-header">
+            <h2>Pilares da Engenharia Sustentável</h2>
+            <p style="color: var(--text-muted)">A tríade tecnológica que sustenta a evolução digital limpa.</p>
+        </div>
+        
+        <div class="grid-pillars">
+            <div class="card">
+                <i class="fa-solid fa-cloud card-icon"></i>
+                <h3>Computação em Nuvem</h3>
+                <p>Migração de data centers locais para arquiteturas hiper-escaláveis globais. Operando com taxas de PUE (Power Usage Effectiveness) extremamente baixas, a nuvem otimiza o uso de refrigeração e centraliza o consumo com foco em energia 100% renovável.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-server card-icon"></i>
+                <h3>Virtualização Avançada</h3>
+                <p>A divisão lógica de hardware físico através de hipervisores reduz drasticamente a ociosidade dos processadores. Menos servidores físicos ligados significam menor dissipação térmica e redução imediata no desperdício de energia dos sistemas.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-bolt card-icon"></i>
+                <h3>Gerenciamento Energético</h3>
+                <p>Implementação de algoritmos preditivos de Power Capping e DVFS (Ajuste Dinâmico de Tensão e Frequência). A infraestrutura de software ajusta o clock dos núcleos de processamento em tempo real conforme a demanda instantânea de tráfego.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="efficiency" id="eficiencia">
+        <div class="section-header">
+            <h2>Eficiência em Escala Humana</h2>
+        </div>
+        
+        <div class="gallery-showcase">
+            <div class="gallery-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800" alt="Energia Limpa e Tecnologia">
+                <div class="gallery-overlay">
+                    <div class="gallery-info">
+                        <h4>Sincronia com Matrizes Renováveis</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Modernos data centers inteligentes agendam cargas de processamento pesado para picos de geração de energia solar e eólica.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-info-text">
+                <h3 style="font-family:'Orbitron'; font-size:1.8rem; margin-bottom:1.5rem; color:#fff;">Descarbonização Sistêmica</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">A TI Verde não foca apenas em reduzir componentes poluentes, mas sim em readequar a termodinâmica computacional. Quando unimos virtualização agressiva à nuvem, o impacto na redução de emissões de carbono equivale a plantar florestas inteiras de forma digital.</p>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Com o gerenciamento inteligente de energia, os servidores entram em estados de deep sleep (hibernação profunda fracionada) em milissegundos de inatividade, cortando gastos desnecessários nas redes globais.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="quiz-section" id="quiz">
+        <div class="section-header">
+            <h2>Desafio Eco-Digital</h2>
+            <p style="color: var(--text-muted)">Teste seus conhecimentos sobre arquiteturas limpas.</p>
+        </div>
+
+        <div class="quiz-container">
+            <div id="quiz-window">
+                <div class="quiz-progress" id="progress">Pergunta 1 de 3</div>
+                <div class="quiz-question" id="question">Carregando pergunta do sistema...</div>
+                <div class="quiz-options" id="options-box">
+                </div>
+                <div class="quiz-footer">
+                    <button class="btn-glow" id="next-btn" style="display:none; padding: 0.6rem 1.5rem;" onclick="loadNextQuestion()">Avançar <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="curiosities">
+        <div class="curio-layout">
+            <div class="curio-box">
+                <h4><i class="fa-solid fa-water" style="color: var(--secondary-cyan)"></i> Refrigeração Oceânica</h4>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Data centers experimentais subaquáticos são lacrados em cápsulas no fundo do oceano gelado. A troca de calor natural com a água do mar elimina em 100% o gasto elétrico com aparelhos de ar-condicionado tradicionais.</p>
+            </div>
+            <div class="curio-box" style="border-color: var(--primary-neon);">
+                <h4><i class="fa-solid fa-weight-hanging" style="color: var(--primary-neon)"></i> O Peso dos Dados</h4>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Se coletássemos absolutamente todos os elétrons livres responsáveis por manter todos os servidores da internet mundial rodando simultaneamente hoje, o peso total da teia de dados do planeta seria de aproximadamente 50 gramas.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 EcoCloud S.A. | Desenvolvido com foco no Futuro Digital Sustentável.</p>
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                question: "Qual o principal benefício ecológico da Virtualização de Servidores?",
+                options: [
+                    "Aumentar fisicamente a quantidade de hardware ligado.",
+                    "Reduzir a ociosidade dos processadores, otimizando o gasto térmico.",
+                    "Substituir completamente as conexões de internet por cabos de fibra.",
+                    "Aumentar o clock dos processadores no nível máximo o tempo todo."
+                ],
+                correct: 1
+            },
+            {
+                question: "O que significa o termo PUE no contexto de um Data Center em nuvem?",
+                options: [
+                    "Potência Útil de Elétrons em tráfego de dados.",
+                    "Protocolo Unificado de Energia Sustentável.",
+                    "Power Usage Effectiveness - métrica de eficiência energética.",
+                    "Processamento Unilateral de Elementos Virtuais."
+                ],
+                correct: 2
+            },
+            {
+                question: "Como o mecanismo de Power Capping atua nos computadores?",
+                options: [
+                    "Desligando o computador abruptamente caso esquente demais.",
+                    "Limitando via software o teto do consumo elétrico dos chips nos picos.",
+                    "Bloqueando a entrada de dados de servidores não certificados.",
+                    "Aumentando a refrigeração do cooler de maneira manual."
+                ],
+                correct: 1
+            }
+        ];
+
+        let currentIdx = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById("question");
+        const optionsBox = document.getElementById("options-box");
+        const progressEl = document.getElementById("progress");
+        const nextBtn = document.getElementById("next-btn");
+
+        function initQuiz() {
+            currentIdx = 0;
+            score = 0;
+            nextBtn.style.display = "none";
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            nextBtn.style.display = "none";
+            optionsBox.innerHTML = "";
+            
+            let currentData = quizData[currentIdx];
+            progressEl.innerText = `Pergunta ${currentIdx + 1} de ${quizData.length}`;
+            questionEl.innerText = currentData.question;
+
+            currentData.options.forEach((option, i) => {
+                const btn = document.createElement("button");
+                btn.classList.add("option-btn");
+                btn.innerText = option;
+                btn.onclick = () => checkAnswer(btn, i);
+                optionsBox.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedBtn, selectedIdx) {
+            let correctIdx = quizData[currentIdx].correct;
+            const allButtons = optionsBox.querySelectorAll(".option-btn");
+
+            allButtons.forEach(btn => btn.disabled = true);
+
+            if (selectedIdx === correctIdx) {
+                selectedBtn.classList.add("correct");
+                score++;
+            } else {
+                selectedBtn.classList.add("wrong");
+                allButtons[correctIdx].classList.add("correct");
+            }
+            nextBtn.style.display = "inline-block";
+        }
+
+        function loadNextQuestion() {
+            currentIdx++;
+            if (currentIdx < quizData.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            progressEl.innerText = "Desafio Concluído";
+            questionEl.innerText = `Você finalizou a calibragem ecológica do sistema!`;
+            optionsBox.innerHTML = `
+                <div style="text-align:center; padding:2rem 0;">
+                    <i class="fa-solid fa-circle-check" style="font-size:4rem; color:var(--primary-neon); margin-bottom:1rem;"></i>
+                    <p style="font-size:1.5rem; font-weight:bold; margin-bottom:0.5rem;">Pontuação: ${score} de ${quizData.length} acertos</p>
+                    <p style="color:var(--text-muted); margin-bottom:2rem;">Sua mentalidade está perfeitamente alinhada com as diretrizes de engenharia sustentável.</p>
+                    <button class="btn-glow" style="font-size:0.9rem;" onclick="initQuiz()">Refazer Desafio</button>
+                </div>
+            `;
+            nextBtn.style.display = "none";
+        }
+
+        // Inicializa o Quiz na primeira execução
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>
